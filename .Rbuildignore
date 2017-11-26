@@ -5,6 +5,7 @@
 ^appveyor\.yml$
 ^\.travis\.yml$
 staple_test\.R$
+^cran-comments\.md$
 ^DESCRIPTION\.bak$
 ^\./\.travis\.yml\.bak$
 ^\./appveyor\.yml\.bak$
