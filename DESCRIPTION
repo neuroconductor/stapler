@@ -27,4 +27,4 @@ Language: en-US
 biocViews:
 Repository: Neuroconductor
 Remotes:  
-    neuroconductor/RNifti@1f2d663fd0682f9bf1fd20458d3d2497ecdfd66a
+    neuroconductor/RNifti@ed39a01662056c509776923a0abdf981454011b0
