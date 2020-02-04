@@ -12,7 +12,6 @@ addons:
     - libxml2-dev
     - libfftw3-dev
     - libgsl0-dev
-    - libgsl0ldbl
     - mesa-common-dev
     - libglu1-mesa-dev
     - devscripts
@@ -20,8 +19,7 @@ os:
 - linux
 - osx
 osx_image: xcode9.4
-services:
-- xvfb
+services: xvfb
 r:
 - 3.3
 - 3.4
@@ -41,6 +39,7 @@ env:
   - CACHE_NAME="${TRAVIS_OS_NAME}-R-${TRAVIS_R_VERSION}"
 r_check_args: "--as-cran --install-args=--build"
 before_install:
+- if [ "$TRAVIS_DIST" = "trusty" ]; then sudo apt-get -y install libgsl0ldbl ; fi
 - ulimit -n 2048
 - export PROJ_DIR=`basename $PWD`
 - fname=travis_helpers.sh
@@ -74,10 +73,8 @@ before_install:
 - setup_python 3.6 false ;
 - install_python_requirements ;
 - R CMD javareconf ;
-after_success:
-- dump_logs
-after_failure:
-- dump_logs
+after_success: dump_logs
+after_failure: dump_logs
 before_deploy:
 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then PKG_TARBALL=$(ls -1t *.tgz | head -n 1);
   PKG_TARBALL_WITH_R=`echo $PKG_TARBALL | sed 's/.tgz/_'"R${rver}"'.tgz/'` ; mv ${PKG_TARBALL}
@@ -96,7 +93,7 @@ deploy:
   on:
     tags: true
   api-key:
-    secure: JthkC1QvdUQBtXX0Om3yExtaiChgfbOIskHhy+CxDF4zrFEsW/78s/+q3p0MipMl/EQrUK2fLsIIbBOS09xZ+wk4C9NKw5mjhua1X48tRNAH0zDvOy3o5dtWSD2urtg/ICUcjv8EICfoU6VmEUrj5PFhWNUWFz3mCJFPYbUnmp1FigncNYsLds2T+hWx9cReQ1poT1B1wumrliYfx9YUdjJOK5gh+F0WqBwFy5TMQHKceNrTgDLf1IeB/1Z22XzJCPNfy4pNjovP3ycFfnfAub6vUIZWGpTb1CqZqVJndfpBxpi2zhDucMwG6dVRrUOktjb5uJE4Hf8I4+tASPGQrcwBYzaS5vmQ7NS4z8oyNK4usKK90k65o0WtEPzjRSNnSC3gV83g6gwrOOQ1Xll1Bv1OgUT7nxbNqPIXFkLeA1mDs/EAl/EkgbvDiS7RDyfx9m47VJQ/EByEyjsUuo2kkfIojvxzpwqIjKs1MxRPW/ZeZyOHnkThHBoxqzzZHge5Hgmxc9dBAjqUe167CyiGfM+KqMOOejFC17C+FB0rJWMdDmFdrgmTRMSp0EwO2CyDbPg7FPsgOMWOugKVCcWJr2mUKBy0vDxGNM67selgHo6Sbg2Fouk2vm7hMBOUX61lpNZFemtRsNCs5JMBKreODFsdpL0tcXQ9pr90DHBxn4g=
+    secure: syIerK2Y5r0+HlQxQHWt++RISstEksjqL/hpiCnbCW8E+qO2aTeFh8l1PrsXJclWL0qUV5qM3aP6O33AxiLj5U4rF7VYtVmAE9/cF++4Ocr2yHdTWL5NB5YBWLUdI9YjpRgrPRPel++NVdIwDuO2iPE5utulDkTeuh8F1Ru/AzxfLTO+G6GN7PaIsCA2HUqcIQrLKMfWJPfSNeFc9e9kZsxipm2jrQDYDtmFoPxcCE7zB8VCSQ+V0iYZuIpXFQlzIji/D0kCOu9pqhC3Q1OxJuH7nGm5nzvf6E89l1RozS4GGA2Nk10rJHmRTOxU3NskAe5lEQzP8fRZlZu+yh2ED7USp92W5CuPX8wS8/kKPx/ZSYmYHXLxsNW7U1BbCw8XOcLE7R+za34nM3YZeN9bQ6ekr2UslGQVt+etEe0CKVDPL3Gb6NMbS5WwVBA09A9q0+sFBHbSAY07YuHJThZJOkBzvsh8hYWH/O4LdZ5AzvZ5w1laJAfrTVNz/c0Ni0jueDXHiJiQMg74Afhm0bKYkODKlKxe4NDfz6k5pJRB2mgBMBK6QoR2AQQUFYlSz8PnLOlpxyJgXWTlkHadM1++jeGzDaOYbJMnsLET+lRiHp/704L15Vu3106xrt11WM4cVe9fbTFLWYx2AF/bKkduIX6GRepAyb4fE0N6FrNoJ0g=
 after_deploy:
 - echo "${PROJECT_NAME}" | grep -q "releases"; if [[ $? -eq 0 ]]; then run_coverage="false";
   else run_coverage=; fi;
@@ -104,4 +101,4 @@ after_deploy:
   -z "${run_coverage}" ]]; then echo 'covr::coveralls(type = "all", quiet = FALSE)'
   > neuroc_covr.R ; travis_wait 100 Rscript neuroc_covr.R ; rm neuroc_covr.R ; fi
 
-#neuroc.deps version (SHA): ddcf477
+#neuroc.deps version (SHA): cec4ca6
