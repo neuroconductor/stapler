@@ -14,3 +14,4 @@ staple_map\.pdf
 staple\.pdf
 ^DESCRIPTION\.bak$
 ^\./\.travis\.yml\.bak$
+^\./appveyor\.yml\.bak$
