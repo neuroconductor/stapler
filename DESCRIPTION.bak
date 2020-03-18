@@ -24,7 +24,4 @@ URL: https://github.com/muschellij2/stapler
 BugReports: https://github.com/muschellij2/stapler/issues
 RoxygenNote: 7.0.2
 Language: en-US
-Repository: Neuroconductor
-Remotes: 
-    neuroconductor/RNifti@48797c0c5ca5ea2e00a3576f584f08b9264e8daa
-biocViews: 
+Remotes:
