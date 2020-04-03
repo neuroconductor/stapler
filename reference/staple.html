@@ -17,16 +17,20 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
+
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -55,7 +59,7 @@ type of input (array/matrix/list of images/filenames of images)" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -69,7 +73,7 @@ type of input (array/matrix/list of images/filenames of images)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stapler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.2</span>
       </span>
     </div>
 
@@ -193,16 +197,22 @@ set of images, including <code>niftiImage</code>s.</p></td>
 #&gt; [2,] 0.7709156 0.8958683
 #&gt; [3,] 0.9948260 0.7605141
 #&gt; [4,] 0.9799160 0.4644834
-#&gt; [5,] 0.9355644 0.7652393</div><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out</span>$<span class='no'>sensitivity</span>[,<span class='st'>"1"</span>],
+#&gt; [5,] 0.9355644 0.7652393</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>is.matrix</a></span>(<span class='no'>staple_out</span>$<span class='no'>sensitivity</span>)) {
+   <span class='no'>staple_out</span>$<span class='no'>sensitivity</span> <span class='kw'>=</span> <span class='no'>staple_out</span>$<span class='no'>sensitivity</span>[, <span class='st'>"1"</span>]
+}
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out</span>$<span class='no'>sensitivity</span>,
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.781593858553476</span>, <span class='fl'>0.895868301462594</span>,
 <span class='fl'>0.760514086161722</span>, <span class='fl'>0.464483444340873</span>,
 <span class='fl'>0.765239314719065</span>))
 <span class='no'>staple_out_prior</span> <span class='kw'>=</span> <span class='fu'>staple</span>(<span class='no'>x</span>, <span class='kw'>prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0.5</span>, <span class='no'>r</span>))</div><div class='output co'>#&gt; <span class='message'>There are 2 levels present</span></div><div class='output co'>#&gt; <span class='message'>Removing elements where all raters agree</span></div><div class='output co'>#&gt; <span class='message'>Making multiple, matrices. Hot-one encode</span></div><div class='output co'>#&gt; <span class='message'>iter: 25, diff: 7.73711779115116e-05</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 5.96097783356342e-08</span></div><div class='output co'>#&gt; <span class='message'>iter: 75, diff: 4.54487558698702e-11</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 3.46389583683049e-14</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='input'>
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>[, <span class='st'>"1"</span>],
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>is.matrix</a></span>(<span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>)) {
+   <span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span> <span class='kw'>=</span> <span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>[, <span class='st'>"1"</span>]
+}
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>,
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.683572080864211</span>, <span class='fl'>0.821556768891859</span>,
 <span class='fl'>0.619166852992802</span>, <span class='fl'>0.389409921992467</span>, <span class='fl'>0.67042085955546</span>))
 
-<span class='no'>res_bin</span> <span class='kw'>=</span> <span class='fu'>staple_bin_mat</span>(<span class='no'>x</span>, <span class='kw'>prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1000</span>))</div><div class='output co'>#&gt; <span class='message'>iter: 1, diff: 0.465231160212495</span></div><div class='output co'>#&gt; <span class='message'>iter: 10, diff: 0.00518796579186032</span></div><div class='output co'>#&gt; <span class='message'>iter: 20, diff: 0.000319714014913819</span></div><div class='output co'>#&gt; <span class='message'>iter: 30, diff: 1.85314590984698e-05</span></div><div class='output co'>#&gt; <span class='message'>iter: 40, diff: 1.0525804566841e-06</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 5.96097783356342e-08</span></div><div class='output co'>#&gt; <span class='message'>iter: 60, diff: 3.37452188414744e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 70, diff: 1.91023197260165e-10</span></div><div class='output co'>#&gt; <span class='message'>iter: 80, diff: 1.08131281706392e-11</span></div><div class='output co'>#&gt; <span class='message'>iter: 90, diff: 6.11954931173386e-13</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 3.48610029732299e-14</span></div><div class='output co'>#&gt; <span class='message'>iter: 110, diff: 1.88737914186277e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>[,<span class='st'>"1"</span>],
+<span class='no'>res_bin</span> <span class='kw'>=</span> <span class='fu'>staple_bin_mat</span>(<span class='no'>x</span>, <span class='kw'>prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1000</span>))</div><div class='output co'>#&gt; <span class='message'>iter: 1, diff: 0.465231160212495</span></div><div class='output co'>#&gt; <span class='message'>iter: 10, diff: 0.00518796579186032</span></div><div class='output co'>#&gt; <span class='message'>iter: 20, diff: 0.000319714014913819</span></div><div class='output co'>#&gt; <span class='message'>iter: 30, diff: 1.85314590984698e-05</span></div><div class='output co'>#&gt; <span class='message'>iter: 40, diff: 1.0525804566841e-06</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 5.96097783356342e-08</span></div><div class='output co'>#&gt; <span class='message'>iter: 60, diff: 3.37452188414744e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 70, diff: 1.91023197260165e-10</span></div><div class='output co'>#&gt; <span class='message'>iter: 80, diff: 1.08131281706392e-11</span></div><div class='output co'>#&gt; <span class='message'>iter: 90, diff: 6.11954931173386e-13</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 3.48610029732299e-14</span></div><div class='output co'>#&gt; <span class='message'>iter: 110, diff: 1.88737914186277e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out_prior</span>$<span class='no'>sensitivity</span>,
 <span class='no'>res_bin</span>$<span class='no'>sensitivity</span>)
 <span class='no'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>
 <span class='no'>r</span> <span class='kw'>=</span> <span class='fl'>1000</span>
@@ -211,15 +221,15 @@ set of images, including <code>niftiImage</code>s.</p></td>
    <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='no'>x</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>,<span class='fl'>10</span>, <span class='fl'>10</span>))
  })
 <span class='no'>mat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>x</span>, <span class='no'>c</span>)
-<span class='no'>staple_out</span> <span class='kw'>=</span> <span class='fu'>staple_bin_img</span>(<span class='no'>x</span>, <span class='kw'>set_orient</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>Reshaping images</span></div><div class='output co'>#&gt; <span class='message'>Running STAPLE for binary matrix</span></div><div class='output co'>#&gt; <span class='message'>iter: 1, diff: 0.33810549683701</span></div><div class='output co'>#&gt; <span class='message'>iter: 10, diff: 0.000420478677933045</span></div><div class='output co'>#&gt; <span class='message'>iter: 20, diff: 1.84523641814094e-05</span></div><div class='output co'>#&gt; <span class='message'>iter: 30, diff: 9.04592971084917e-07</span></div><div class='output co'>#&gt; <span class='message'>iter: 40, diff: 4.67754142086108e-08</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 2.48293940963151e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 60, diff: 1.33460908990912e-10</span></div><div class='output co'>#&gt; <span class='message'>iter: 70, diff: 7.21600557085367e-12</span></div><div class='output co'>#&gt; <span class='message'>iter: 80, diff: 3.91242593877905e-13</span></div><div class='output co'>#&gt; <span class='message'>iter: 90, diff: 2.1316282072803e-14</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 1.22124532708767e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='output co'>#&gt; <span class='message'>Creating output probability image/array</span></div><div class='output co'>#&gt; <span class='message'>Creating output prior image/array</span></div><div class='output co'>#&gt; <span class='message'>Creating label image (probability &gt;= 0.5)</span></div><div class='input'><span class='no'>res_mat</span> <span class='kw'>=</span> <span class='fu'>staple</span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>mat</span>))</div><div class='output co'>#&gt; <span class='message'>There are 2 levels present</span></div><div class='output co'>#&gt; <span class='message'>Removing elements where all raters agree</span></div><div class='output co'>#&gt; <span class='message'>Making multiple, matrices. Hot-one encode</span></div><div class='output co'>#&gt; <span class='message'>iter: 25, diff: 4.04835189660169e-06</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 2.48293952065382e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 75, diff: 1.67976743625786e-12</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 1.22124532708767e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out</span>$<span class='no'>sensitivity</span>, <span class='no'>res_mat</span>$<span class='no'>sensitivity</span>[, <span class='st'>"1"</span>])</div></pre>
+<span class='no'>staple_out</span> <span class='kw'>=</span> <span class='fu'>staple_bin_img</span>(<span class='no'>x</span>, <span class='kw'>set_orient</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>Reshaping images</span></div><div class='output co'>#&gt; <span class='message'>Running STAPLE for binary matrix</span></div><div class='output co'>#&gt; <span class='message'>iter: 1, diff: 0.33810549683701</span></div><div class='output co'>#&gt; <span class='message'>iter: 10, diff: 0.000420478677933045</span></div><div class='output co'>#&gt; <span class='message'>iter: 20, diff: 1.84523641814094e-05</span></div><div class='output co'>#&gt; <span class='message'>iter: 30, diff: 9.04592971084917e-07</span></div><div class='output co'>#&gt; <span class='message'>iter: 40, diff: 4.67754142086108e-08</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 2.48293940963151e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 60, diff: 1.33460908990912e-10</span></div><div class='output co'>#&gt; <span class='message'>iter: 70, diff: 7.21600557085367e-12</span></div><div class='output co'>#&gt; <span class='message'>iter: 80, diff: 3.91242593877905e-13</span></div><div class='output co'>#&gt; <span class='message'>iter: 90, diff: 2.1316282072803e-14</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 1.22124532708767e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='output co'>#&gt; <span class='message'>Creating output probability image/array</span></div><div class='output co'>#&gt; <span class='message'>Creating output prior image/array</span></div><div class='output co'>#&gt; <span class='message'>Creating label image (probability &gt;= 0.5)</span></div><div class='input'><span class='no'>res_mat</span> <span class='kw'>=</span> <span class='fu'>staple</span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>mat</span>))</div><div class='output co'>#&gt; <span class='message'>There are 2 levels present</span></div><div class='output co'>#&gt; <span class='message'>Removing elements where all raters agree</span></div><div class='output co'>#&gt; <span class='message'>Making multiple, matrices. Hot-one encode</span></div><div class='output co'>#&gt; <span class='message'>iter: 25, diff: 4.04835189660169e-06</span></div><div class='output co'>#&gt; <span class='message'>iter: 50, diff: 2.48293952065382e-09</span></div><div class='output co'>#&gt; <span class='message'>iter: 75, diff: 1.67976743625786e-12</span></div><div class='output co'>#&gt; <span class='message'>iter: 100, diff: 1.22124532708767e-15</span></div><div class='output co'>#&gt; <span class='message'>Convergence!</span></div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>is.matrix</a></span>(<span class='no'>res_mat</span>$<span class='no'>sensitivity</span>)) {
+   <span class='no'>res_mat</span>$<span class='no'>sensitivity</span> <span class='kw'>=</span> <span class='no'>res_mat</span>$<span class='no'>sensitivity</span>[, <span class='st'>"1"</span>]
+}
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(<span class='no'>staple_out</span>$<span class='no'>sensitivity</span>, <span class='no'>res_mat</span>$<span class='no'>sensitivity</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -230,7 +240,7 @@ set of images, including <code>niftiImage</code>s.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
 </div>
 
       </footer>
